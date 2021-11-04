@@ -1,0 +1,35 @@
+<div class="row mt-5">
+  <h1>Winkelwagentje</h1>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let product of Cart?.Products">
+        <td>
+          <img [src]="webshopinformationserviceUrl + product.images[0]" *ngIf="product.images != null" />
+        </td>
+        <td>
+          {{product.name}}
+        </td>
+        <td>
+          <select (change)="UpdateProductQty($event.target.value, product)">
+            <option *ngFor="let number of QuantityNumbers" [selected]="number == product.cartquantity">
+              {{number}}
+            </option>
+          </select>
+        </td>
+        <td class="text-right">
+          {{ product.price * product.cartquantity }} €
+        </td>
+        <td class="text-right">
+          <button class="btn btn-danger" (click)="deleteProductFromCart(product)">Verwijder</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="Cart?.Products != null && Cart.Products.length !== 0">
+      <tr>
+          <td>Totaal</td>
+        <td colspan="3" class="text-right">{{ Cart.Total }} €</td>
+        <td class="text-right"><button class="btn btn-primary" (click)="CreateOrder()">Bestel</button></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

@@ -1,0 +1,35 @@
+<header class="header-section">
+  <div class="container-fluid">
+      <div class="inner-header">
+          <div class="logo">
+              <a href="./index.html"><img src="assets/img/logo.png" alt=""></a>
+          </div>
+          <div class="header-right">
+              <img src="assets/img/icons/search.png" alt="" class="search-trigger">
+              <img src="assets/img/icons/man.png" alt="">
+              <a href="#" [routerLink]="['/order']">
+                  <img src="assets/img/icons/bag.png" alt="">
+              <span>{{ cart.Products.length}}</span>
+              </a>
+          </div>
+          <div class="user-access">
+          </div>
+          <nav class="main-menu mobile-menu">
+              <ul>
+                  <li><a class="active" [routerLink]="['/']">Home</a></li>
+                  <li *ngFor="let category of MainCategories" (click)="webshopInformationStore.ChangeCurrentCategory(category)" [routerLink]="['/products']">
+                    <a>{{category.categoryName}}</a>
+                      <ul class="sub-menu" *ngIf="category.subCategoriesIds.length != 0">
+                          <li *ngFor="let subcategory of category.subCategoriesIds" (click)="webshopInformationStore.ChangeCurrentCategoryById($event,subcategory)"
+                          [routerLink]="['/products']"><a>{{ webshopInformationStore.Category(subcategory)?.categoryName}}</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </nav>
+      </div>
+  </div>
+</header>
+
+<div class="header-info">
+</div>
+

@@ -1,0 +1,48 @@
+<!-- Table -->
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Category Name</th>
+      <th scope="col">Sub</th>
+      <th scope="col">action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories">
+      <td>{{ category.categoryName }}</td>
+      <td><p *ngFor="let category of getFilterdSubcategories(category.subCategoriesIds)">{{category.categoryName}}</p></td>
+      <td>
+        <button type="button" class="btn btn-danger" (click)=deleteCategory(category.id)>Delete</button>
+        <button type="button" class="btn btn-primary" (click)="selectedCategoryId = category.id" data-toggle="modal" data-target="#addSub">Add Sub</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal add sub component -->
+<div class="modal fade" id="addSub" tabindex="-1" role="dialog" aria-labelledby="addSubLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addSubLabel">Add Subcategory</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="subCategoryParentIdForm" (ngSubmit)="addSubCategory()">
+          <div class="form-group">
+            <label for="subCat"> Choose parrent</label>
+            <select class="form-control" id="subCat" formControlName="ParentId"  required>
+              <option value="" disabled selected>Choose a Category</option>
+              <option *ngFor="let category of getFilterdCategories()" value="{{ category.id }}">{{ category.categoryName }}</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

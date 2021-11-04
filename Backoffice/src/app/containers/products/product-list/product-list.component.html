@@ -1,0 +1,89 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      All products
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">SKU</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Discount Price</th>
+            <th scope="col">WholeSale Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.sku }}</td>
+            <td>{{ product.name }}</td>
+            <td>€ {{ product.price }}</td>
+            <td>€ {{ product.discountPrice }}</td>
+            <td>€ {{ product.wholeSalePrice }}</td>
+            <td >{{ getCategoryName(product.category) }}</td>
+            <td (click)="selectedProduct = product" data-toggle="modal" data-target="#addProductStock">{{ product.quantity }}</td>
+            <td>
+              <button type="button" class="btn btn-danger">Delete</button>
+              <button type="button" (click)="selectedProduct = product" class="btn btn-primary" data-toggle="modal" data-target="#editProduct">Edit</button>
+            </td>
+          </tr>
+          <tr>
+        </tbody>
+      </table>
+</div>
+<!-- Modal add sub component -->
+<div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="editProductLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProductLabel">Edit Product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addProductToCategoryForm" (ngSubmit)="addProductToCategory()">
+          <div class="form-group">
+            <label for="categoryId"> Choose Category</label>
+            <select class="form-control" id="categoryId" formControlName="categoryId" required>
+              <option value="" disabled selected>Choose a Category</option>
+              <option *ngFor="let category of categories" value="{{ category.id }}">{{ category.categoryName }}</option>
+            </select>
+          </div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal add sub component -->
+<div class="modal fade" id="addProductStock" tabindex="-1" role="dialog" aria-labelledby="addProductStockLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addProductStockLabel">Add Product Stock</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addProductToStockForm" (ngSubmit)="addProductQuantity()">
+          <div class="form-group">
+            <div class="col-md-12"><h2>Product Stock</h2></div>
+            <div class="form-group col-md-4">
+              <label for="stock">Product Stock</label>
+              <input type="number" formControlName="quantity" decimals="0" class="form-control" id="quantity">
+            </div>
+            </div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="categoryAddForm" (ngSubmit)="submitCategory()">
+        <div class="form-group">
+          <label for="CategoryName">Category name</label>
+          <input type="text" formControlName="CategoryName" class="form-control" id="CategoryName">
+        </div>
+        <div class="form-group">
+          <label for="CategoryDescription">Description</label>
+          <textarea type="text" formControlName="CategoryDescription" class="form-control" id="CategoryDescription" rows="5"></textarea>
+        </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>

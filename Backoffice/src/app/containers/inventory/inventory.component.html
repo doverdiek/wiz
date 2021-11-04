@@ -1,0 +1,92 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-8">
+          Inventory Management
+        </div>
+        <div class="col-md-4">
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#addRule" >Add rule</button>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered" *ngIf="inventoryRuleList.length > 0">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Type</th>
+            <th scope="col">Email</th>
+            <th scope="col">Return Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inventoryRule of inventoryRuleList">
+            <td>{{inventoryRule.productId}}</td>
+            <td>{{inventoryRule.quantity}}</td>
+            <td>{{inventoryRule.type}}</td>
+            <td>{{inventoryRule.customerEmail}}</td>
+            <td>{{inventoryRule.returnDate}}</td>
+          </tr>
+          <tr>
+        </tbody>
+      </table>
+      <div *ngIf="inventoryRuleList.length == 0">
+        <p>There are no rules add a new rule</p>
+      </div>
+
+</div>
+
+<div class="modal fade" id="addRule" tabindex="-1" role="dialog" aria-labelledby="addRuleLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addRuleLabel">Add new rule</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addRuleForm" (ngSubmit)="addRule()">
+            <div class="form-group">
+              <label for="stock">Choose product</label>
+              <select class="form-control" id="productId" formControlName="productId" required>
+                <option value="" disabled selected>Choose a product</option>
+                <option *ngFor="let Product of productList" value="{{ Product.id }}">{{ Product.name }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="stock">Amount</label>
+              <input type="number" formControlName="quantity" decimals="0" class="form-control" id="quantity">
+            </div>
+            <div class="form-group">
+              <label for="stock">Reason Return
+              </label>
+              <select class="form-control" id="type" formControlName="type" required>
+                <option value="" disabled selected>Choose a reason</option>
+                <option *ngFor="let type of typeList" value="{{ type }}">{{ type }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="stock">Description</label>
+              <textarea rows="5" type="text" formControlName="description" decimals="0" class="form-control" id="description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="stock">Customer Email</label>
+              <input type="text" formControlName="customerEmail" decimals="0" class="form-control" id="customerEmail">
+            </div>
+            <div class="form-group">
+              <label for="stock">Return date</label>
+              <input type="text" formControlName="returnDate" decimals="0" class="form-control" id="returnDate">
+            </div>
+
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

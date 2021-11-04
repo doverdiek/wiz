@@ -1,0 +1,17 @@
+<section class="latest-products spad">
+  <a class="container">
+    <a class="row" id="product-list">
+        <a class="col-lg-3 col-sm-6 mix all dresses bags" *ngFor="let product of Products" (click)="webinformationStore.ShowProductDetails(product)">
+            <a class="single-product-item">
+                <figure>
+                    <a><img [src]="product.images != null?informationserviceUrl + product.images[0]: null" alt="" ></a>
+                </figure>
+                <div class="product-text">
+                    <h6>{{product.name}}</h6>
+                    <p>{{product.price}}</p>
+                </div>
+            </a>
+        </a>
+    </a>
+</a>
+</section>

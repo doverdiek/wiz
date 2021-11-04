@@ -1,0 +1,34 @@
+<div class="row mt-2">
+<div class="col-6">
+  <img *ngIf="ProductDetails.images != null" [src]="informationserviceUrl + ProductDetails.images[0]">
+</div>
+<div class="col-6">
+  <button class="btn btn-primary" (click)="AddToCart(ProductDetails)">Add to cart</button>
+</div>
+</div>
+<div class="row">
+  <table class="table">
+    <tbody>
+        <tr>
+            <td>Sku</td>
+            <td>{{ProductDetails.sku}}</td>
+          </tr>
+      <tr>
+        <td>Name</td>
+        <td>{{ProductDetails.name}}</td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td>{{ProductDetails.description}}</td>
+      </tr>
+      <tr>
+          <td>Price</td>
+          <td>{{ProductDetails.price}}</td>
+      </tr>
+      <tr *ngFor="let property of ProductDetails.properties">
+          <td>{{property.name}}</td>
+          <td>{{property.values[0]}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

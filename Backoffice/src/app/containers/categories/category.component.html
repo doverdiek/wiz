@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="content-center">
+    <div class="animated fadeIn">
+      <h2 class="mb-3">Create Category</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <category-add (categoryAdded) = "refreshComponent()"></category-add>
+        </div>
+        <div class="col-md-6">
+          <category-list #list></category-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
